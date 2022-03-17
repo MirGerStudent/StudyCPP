@@ -3,12 +3,13 @@
 #include <cmath>
 
 int main() {
-    int change_numbers = 0, change_letters = 0, change_sumbols = 0, change_margins = 0;
+    int change_numbers = -1, change_letters = -1, change_sumbols = -1, change_margins = -1;
     const int count_numbers = 10, count_letters = 52, count_sumbols = 31, count_margins = 2;
     int now_number = 100;
     int change = 0;
     int count = -99;
     int count_x = 0;
+    int now_rand = 101;
 
     char filename[256];
     srand(time(0));
@@ -18,7 +19,7 @@ int main() {
     char numbers[10] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
     char sumbols[31] = {',', '.', '/', '|', '!', '@', '#', '$', '%', '^', '&', '?', '*', '(', ')', '[', ']', '{', '}', '<', '>', ':', ';', '`', '"', '_', '~', '+', '-', '+', '='};
 
-    printf("Генератор файлов 3.0 v\n\n");
+    printf("Генератор файлов 5.0 v\n\n");
     printf("Введите название файла (с расширением) - ");
     scanf("%s", filename);
     std::ofstream data(filename);
@@ -32,34 +33,43 @@ int main() {
 
     if (count == 0) printf("Файл %s - пустой!", filename);
     else {
-        while ((change_letters <= 0) || (change_letters >= now_number)) {
+        printf("Всего 4 критерия: буквы, цифры, символы и пробелы с переходом на новую строку\n\n");
+        while ((change_letters < 0) || (change_letters > now_number)) {
             printf("Введите число вероятности выпадения букв (в процентах от 0 до %d) - ", now_number);
             scanf("%d", &change_letters);
         }
         now_number = now_number - change_letters;
 
-        while ((change_numbers <= 0) || (change_numbers > now_number)) {
-            printf("Введите число вероятности выпадения чисел (в процентах от 0 до %d) - ", now_number);
-            scanf("%d", &change_numbers);
+        if (now_number != 0) {
+            while ((change_numbers < 0) || (change_numbers > now_number)) {
+                printf("Введите число вероятности выпадения чисел (в процентах от 0 до %d) - ", now_number);
+                scanf("%d", &change_numbers);
+            }
+            now_number = now_number - change_numbers;
         }
-        now_number = now_number - change_numbers;
 
-        while ((change_sumbols <= 0) || (change_sumbols > now_number)) {
-            printf("Введите число вероятности выпадения символов (в процентах от 0 до %d) - ", now_number);
-            scanf("%d", &change_sumbols);
-        }
+        if (now_number != 0 ) {
+            while ((change_sumbols < 0) || (change_sumbols > now_number)) {
+                printf("Введите число вероятности выпадения символов (в процентах от 0 до %d) - ", now_number);
+                scanf("%d", &change_sumbols);
+            }
         now_number = now_number - change_sumbols;
-
-        while ((change_margins <= 0) || (change_margins > now_number)) {
-            printf("Введите число вероятности выпадения пробела или перехода (в процентах от 0 до %d) - ", now_number);
-            scanf("%d", &change_margins);
         }
-        now_number = now_number - change_margins;
 
+        if (now_number != 0) { 
+            while ((change_margins < 0) || (change_margins > now_number)) {
+                printf("Введите число вероятности выпадения пробела или перехода (в процентах от 0 до %d) - ", now_number);
+                scanf("%d", &change_margins);
+            }
+            now_number = now_number - change_margins;
+        }
 
+        if (now_number != 0) {
+            now_rand -= now_number;
+        }
 
         while (count_x != count) {
-            change = rand() % 101;
+            change = rand() % now_rand;
             if ((0 <= change) && ( change < change_letters)) {
                 data << letters[rand() % count_letters];
             } else
@@ -69,7 +79,7 @@ int main() {
             if ((change_letters + change_numbers <= change) && (change < change_letters + change_numbers + change_sumbols)) {
                 data << sumbols[rand() % count_sumbols];
             } else
-            if ((change_letters + change_numbers + change_sumbols <= change) && (change <= 100)) {
+            if ((change_letters + change_numbers + change_sumbols <= change) && (change < 100)) {
                 data << margins[rand() % count_margins];
             }   
             count_x++;     
