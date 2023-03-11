@@ -22,7 +22,7 @@ namespace MyBoxes {
 		if (maxWeight > (containerWeight() + box.getWeight())) {
 			container.push_back(box);
 		} else {
-			std::cout << "!WARNING!" << std::endl;
+			std::cout << "Нет места в контейнере!" << std::endl;
 		}
 	}
 

@@ -28,12 +28,13 @@ int main()
     ArrEmptyBox[4] = Box4;
     ArrEmptyBox[5] = Box5;
 
-    std::cout << SumWeight(Arr, 2) << std::endl;
-    std::cout << IdealBoxs(Arr, 2, 40, 40, 40) << std::endl;
-    std::cout << MaxWeight(Arr, 2, 12167) << std::endl;
-    std::cout << VolumeOneInOne(ArrEmptyBox, 6) << std::endl;
+    std::cout << "Total weight of two boxes " << SumWeight(Arr, 2) << std::endl;
+    std::cout << "The sum of length, height and width does not exceed the specified value" << IdealBoxs(Arr, 2, 40, 40, 40) << std::endl;
+    std::cout << "The maximum weight of boxes whose volume is not " <<
+                 "greater than the maxV parameter" << MaxWeight(Arr, 2, 12167) << std::endl;
+    std::cout << "Checking whether the boxes are marked in the box" << VolumeOneInOne(ArrEmptyBox, 6) << std::endl;
 
-    std::cout << "Operator == " << (Box11 == Box4) << std::endl;
+    std::cout << "Operator Box_1 (" << Box11 << ") == Box_2 (" << Box4 << ") " << (Box11 == Box4) << std::endl;
     std::cout << "Operator << " << Box11 << std::endl;
 
     Box Box12;
@@ -55,12 +56,10 @@ int main()
     CC[1].setHeight(42);
 
     std::cout << CC << std::endl;
-    std::cout << CC.containerWeight() << std::endl;
 
     CC.addBox(Box(10, 10, 10, 300, 200));
 
     std::cout << CC << std::endl;
-    std::cout << CC.containerWeight() << std::endl;
 
     return 0;
 }
