@@ -1,4 +1,4 @@
-#include "box.h"
+#include "BoxStruct.h"
 #include <iostream>
 
 box::box(int Length, int Width, int Height, double Weight, int Value)

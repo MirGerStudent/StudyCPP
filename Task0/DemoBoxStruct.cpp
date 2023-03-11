@@ -1,5 +1,5 @@
 #include <iostream>
-#include "box.h"
+#include "BoxStruct.h"
 
 int main() {
     box box1 = box(23, 23, 23, 2300, 2300);
@@ -30,7 +30,7 @@ int main() {
     std::cout << MaxWeight(Arr, 2, 12167) << std::endl;
     std::cout << VolumeOneInOne(ArrEmptyBox, 6) << std::endl;
 
-    std::cout << "Operator == " << (box11 == box4) << std::endl;
+    std::cout << "Operator " << box11 << " == " << box4 << " " << (box11 == box4) << std::endl;
     std::cout << "Operator << " << box11 << std::endl;
 
     box box12;

@@ -1,12 +1,13 @@
+#include "BoxClass.h"
 #include <vector>
-#include "Box.h"
 
+namespace MyBoxes {
 class Container {
 	private:
 		std::vector<Box> container;
 		int length;
-        int width;
-        int height;
+		int width;
+		int height;
 		double maxWeight;
 
 	public:
@@ -18,6 +19,8 @@ class Container {
 		void addBox(Box box);
 		Box getBox(int index);
 		void removeBox(int index);
-		friend std::istream& operator >> (std::istream &in, Container &container);
-    	friend std::ostream& operator << (std::ostream &os, Container &container);
-};
+		friend std::istream& operator>>(std::istream& in, Container& container);
+		friend std::ostream& operator<<(std::ostream& os, Container& container);
+		Box& operator[](int index);
+	};
+}

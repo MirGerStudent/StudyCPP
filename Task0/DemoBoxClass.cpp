@@ -1,7 +1,10 @@
-#include <iostream>
 #include "Container.h"
+#include <iostream>
 
-int main() {
+using namespace MyBoxes;
+
+int main()
+{
     Box Box1 = Box(23, 23, 23, 2300, 2300);
     Box Box2 = Box(12, 12, 12, 1200, 1200);
     Box Arr[2];
@@ -36,13 +39,28 @@ int main() {
     Box Box12;
     std::cout << "Operator >> ";
     std::cin >> Box12;
-    std::cout << "Output Box " << Box12 << std::endl;
+    std::cout << "Output Box_1 " << Box12 << std::endl;
 
-    Container CC = Container(20, 20, 20, 300.90);
+    std::cout << "Create container ";
+    Container CC = Container(100, 100, 100, 1000);
+    std::cin >> CC;
+
+    std::cout << "Output empty conteiner \n" << CC << "Add Box_1 (" << Box12 << ") and Box_2 (" << Box11 << ") in container" << std::endl;
+
     CC.addBox(Box12);
     CC.addBox(Box11);
+
+    std::cout << "Output container " << CC << std::endl;
+
+    CC[1].setHeight(42);
+
+    std::cout << CC << std::endl;
     std::cout << CC.containerWeight() << std::endl;
 
-    
+    CC.addBox(Box(10, 10, 10, 300, 200));
+
+    std::cout << CC << std::endl;
+    std::cout << CC.containerWeight() << std::endl;
+
     return 0;
 }
