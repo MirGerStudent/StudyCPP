@@ -24,7 +24,7 @@ class ArrayList {
 		ArrayList& operator= (ArrayList &&Arr);
 		bool operator== (const ArrayList &Arr) const;
 		bool operator!= (const ArrayList &Arr) const;
-		friend ArrayList& operator+ (const ArrayList &Arr1, const ArrayList &Arr2);
+		friend ArrayList operator+ (const ArrayList &Arr1, const ArrayList &Arr2);
 		bool operator>= (const ArrayList &Arr) const;
 		bool operator> (const ArrayList &Arr) const;
 		bool operator<= (const ArrayList &Arr) const;

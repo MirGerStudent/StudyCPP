@@ -129,11 +129,11 @@ bool ArrayList::operator!= (const ArrayList &Arr) const {
 	}
 
 	try {
-		bool res = true;
+		bool res = false;
 
 		for (int i = 0; i < size; i++) {
 			if (Arr.arrayList[i] == this->arrayList[i]) {
-				res = false;
+				res = true;
 				break;
 			}
 		}
@@ -145,14 +145,14 @@ bool ArrayList::operator!= (const ArrayList &Arr) const {
 	}
 }
 
-ArrayList& operator+ (const ArrayList &Arr1, const ArrayList &Arr2) {
+ArrayList operator+ (const ArrayList &Arr1, const ArrayList &Arr2) {
 	ArrayList res = ArrayList(Arr1.size + Arr2.size);
 
 	for (int i = 0; i < Arr1.size; i++) {
 		res.arrayList[i] = Arr1.arrayList[i];
 	}
 	for (int i = Arr1.size; i < Arr2.size + Arr1.size; i++ ) {
-		res.arrayList[i] = Arr2.arrayList[i];
+		res.arrayList[i] = Arr2.arrayList[i-Arr1.size];
 	}
 
 	return res;
