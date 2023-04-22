@@ -52,7 +52,5 @@ int main() {
     std::cout << "Arr4 >= Arr3 " << (Arr4 >= Arr3) << std::endl;
     std::cout << "Arr4 <= Arr3 " << (Arr4 <= Arr3) << std::endl;
 
-    
-
     return 0;
 }

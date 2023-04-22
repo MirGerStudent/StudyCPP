@@ -103,7 +103,7 @@ ArrayList& ArrayList::operator= (ArrayList &&Arr) {
 
 bool ArrayList::operator== (const ArrayList &Arr) const{
 	if (this->size != Arr.size) {
-		DAIException("Размеры массивов не совпадают!");
+		throw DAIException("Размеры массивов не совпадают!");
 	}
 
 	try {
@@ -125,7 +125,7 @@ bool ArrayList::operator== (const ArrayList &Arr) const{
 
 bool ArrayList::operator!= (const ArrayList &Arr) const {
 	if (this->size != Arr.size) {
-		DAIException("Размеры массивов не совпадают!");
+		throw DAIException("Размеры массивов не совпадают!");
 	}
 
 	try {
