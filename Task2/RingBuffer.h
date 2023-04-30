@@ -4,6 +4,8 @@ class RingBuffer {
         int head;
         int tail;
         int *Array;
+
+        int operator[] (int index);
     public:
         RingBuffer();
         RingBuffer(int size);
@@ -17,4 +19,8 @@ class RingBuffer {
         void push(int value);
         int front();
         int get_front();
+        int get_head();
+        int get_tail();
+
+        friend class IteratorRingBuff;
 };

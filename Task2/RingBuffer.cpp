@@ -2,13 +2,13 @@
 #include "RingBuffer.h"
 #include <iostream>
 
-RingBuffer::RingBuffer() : size(101),
+RingBuffer::RingBuffer() : size(100),
                            head(0), 
                            tail(0), 
-                           Array(new int[101]) 
+                           Array(new int[100]) 
                            {}
 
-RingBuffer::RingBuffer(int size) : size(size + 1), 
+RingBuffer::RingBuffer(int size) : size(size), 
                                    head(0), 
                                    tail(0), 
                                    Array(new int[size]) 
@@ -28,7 +28,7 @@ RingBuffer::~RingBuffer() {
 }
 
 int RingBuffer::length() {
-    return size-1;
+    return size;
 }
 
 void RingBuffer::clear() {
@@ -84,3 +84,15 @@ int RingBuffer::get_front() {
         std::cerr << err.what() << '\n';
     }   
 }
+
+int RingBuffer::get_head() {
+    return head;
+}
+
+int RingBuffer::get_tail() {
+    return tail;
+}
+
+// int RingBuffer::operator[] (int index) {
+    
+// }
