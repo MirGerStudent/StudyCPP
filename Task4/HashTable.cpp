@@ -55,19 +55,35 @@ void HashTable<T, U>::add(const T &key, const U &value) {
 
 template<class T, class U>
 void HashTable<T, U>::erase(const T &key) {
-
+    size_t index = std::hash<T>()(key) % size_;
+    
+    HashNode<T, U> *it = &HashArray_[index];
+    while (it->next->key_ != key) {
+        it = it->next;
+    }
+    HashNode<T, U> *temp = it->next;
+    it->next=temp->next;
+    delete temp;
+    count_--;
 }
 
 template<class T, class U>
 U HashTable<T, U>::search(const T &key) const {
+    size_t index = std::hash<T>()(key) % size_;
 
+    HashNode<T, U> *res = &HashArray_[index];
+    while (res->key_ != key) {
+        res = res->next;
+    }
+
+    if (res == nullptr) throw HashException("Елемент с таким ключём не найден!");
+
+    try {
+        return res->data_;
+    } catch (const HashException &err) {
+        std::cerr << err.what() << "\n";
+    }
 }
-
-template<class T, class U>
-U &HashTable<T, U>::search(const T &key) {
-
-}
-
 
 template<class T, class U>
 void HashTable<T, U>::makeEmpty() {
@@ -131,27 +147,6 @@ HashTable<T, U> &HashTable<T, U>::operator=(HashTable<T, U> &&hash) {
 
 
     // return (*this);
-}
-
-template<class T, class U>
-void HashTable<T, U>::print() {
-    // size_t N_;
-    // HashNode<T, U> *Curr_;
-
-    // N_ = 0; 
-    // size_t i = 0;
-    // while (i < size_ && N_ < size_) {
-    //     while (HashArray_[N_].next == nullptr) {++N_;}
-    //     Curr_ = HashArray_[N_].next;
-    //     i++;
-    //     std::cout << Curr_->data_ << " ";
-    //     while (Curr_->next != nullptr) {
-    //         i++;
-    //         Curr_ = Curr_->next;
-    //         std::cout << Curr_->data_ << " ";
-    //     }
-    //     N_++;                 
-    // } 
 }
 
 template<typename T, typename U>
@@ -233,7 +228,6 @@ bool HashTable<T, U>::HashIterator::finish() {
 
     try {
         size_t N = (hash_->size_)-1;
-        // std::cout << N << " ";
         while (hash_->HashArray_[N].next == nullptr) {
             N--;
         }
@@ -242,7 +236,6 @@ bool HashTable<T, U>::HashIterator::finish() {
         GoodElem = hash_->HashArray_[N].next;
 
         if (GoodElem != nullptr) {
-            // std::cout << GoodElem->data_ << " ";
             while (GoodElem->next != nullptr) {
                 GoodElem = GoodElem->next;
             }

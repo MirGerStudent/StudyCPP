@@ -2,7 +2,6 @@
 #include "HashTable.cpp"
 
 int main() {
-    // HashTable<char, int> II = (HashTable<char, int>) alloc(sizeof (HashTable<char, int>));
     HashTable<char, int> II(5);
 
     II.add('K', 98);
@@ -19,15 +18,27 @@ int main() {
     II.add('B', 20);
     II.add('C', 76);
 
-    II.print();
-
     HashTable<char, int>::HashIterator IT(II);
     IT.start();
     while (!IT.finish()) {
-        std::cout << IT.getValue()->data_ << std::endl;
+        std::cout << IT.getValue()->data_ << " ";
         IT.next();
     }
-    
+    std::cout << std::endl;
+
+    II.erase('R');
+
+    std::cout << "\n\n" << std::endl;
+
+    IT.start();
+    while (!IT.finish()) {
+        std::cout << IT.getValue()->data_ << " ";
+        IT.next();
+    }
+
+    std::cout << "\n\n" << std::endl;
+
+    std::cout << II.search('K') << std::endl;
 
     II.makeEmpty();
     return 0;

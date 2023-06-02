@@ -18,13 +18,6 @@ struct HashNode {
         HashNode() :
                     next{nullptr}
                     {}
-
-        // HashNode<T, U>& operator=(const HashNode<T, U> &node) {
-        //     key_ = node.key_;
-        //     data_ = node.data_;
-        //     next = node
-        // }
-        // HashNode<T, U>& operator=(HashNode<T, U> &&node);
 };
 
 template <typename T, typename U>
@@ -42,12 +35,11 @@ class HashTable {
         void add(const T &key, const U &value);
         void erase(const T &key);
         U search(const T &key) const;
-        U& search(const T &key);
+        // U search(T key) const;
         void makeEmpty();
         bool isEmpty() const;
         HashTable<T, U>& operator=(const HashTable<T, U> &hash);
         HashTable<T, U>& operator=(HashTable<T, U> &&hash);
-        void print();
         class HashIterator {
             private:
                 HashTable<T, U> *hash_;
