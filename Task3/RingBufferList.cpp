@@ -1,6 +1,7 @@
 #include "RingBufferList.h"
 #include "AbstractList.h"
 #include "RBLExeption.cpp"
+#include <iostream>
 
 template <typename T>
 RingBufferList<T>::RingBufferList() : Buff{nullptr}, length{0} {
