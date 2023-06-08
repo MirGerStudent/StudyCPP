@@ -39,17 +39,17 @@ void HashTable<T, U>::add(const T &key, const U &value) {
         HashNode<T, U> *newNode = new HashNode<T, U>(key, value);
         HashArray_[index].next = newNode;
         count_++;
-        // std::cout << "OK" << std::endl;
+        std::cout << "OK" << std::endl;
     } else {
-        HashNode<T, U> *newNode = &HashArray_[index];
+        HashNode<T, U> *it = &HashArray_[index];
         do {
-            newNode = newNode->next;
+            it = it->next;
         } 
-        while (newNode->next != nullptr);
+        while (it->next != nullptr);
         HashNode<T, U> *newElem = new HashNode<T, U>(key, value);
-        newNode->next = newElem;
+        it->next = newElem;
         count_++;
-        // std::cout << "OK+" << std::endl;
+        std::cout << "OK+" << std::endl;
     }
 }
 
@@ -101,8 +101,6 @@ void HashTable<T, U>::makeEmpty() {
             delete newNode;
         }
     }
-
-    size_ = 0;
     count_ = 0;
 }
 
@@ -115,6 +113,7 @@ template<class T, class U>
 HashTable<T, U> &HashTable<T, U>::operator=(const HashTable<T, U> &hash) {
     if (!isEmpty()) {
         makeEmpty();
+        size_ = 0;
     }
 
     this->count_ = hash.count_;
@@ -133,10 +132,8 @@ HashTable<T, U> &HashTable<T, U>::operator=(const HashTable<T, U> &hash) {
                 HashNode<T, U> *newNode = new HashNode<T, U>();
                 newNode->data_ = nowNode->data_;
                 newNode->key_ = nowNode->key_;
-                
             }
         }
-        
     }
 
     return (*this);
